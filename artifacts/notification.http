@@ -1,0 +1,23 @@
+### Get notifications
+
+GET {{url}}/api/notifications
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get unseen count
+
+GET {{url}}/api/notifications/unseen-count
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Mark seen all
+
+PUT {{url}}/api/notifications/seen
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Mark seen notification
+
+PUT {{url}}/api/notifications/{{notificationId}}/seen
+Content-Type: application/json
+Authorization: Bearer {{token}}

@@ -1,0 +1,5 @@
+### Get shipment statuses
+
+GET {{url}}/api/products/shipment-statuses
+Content-Type: application/json
+Authorization: Bearer {{token}}

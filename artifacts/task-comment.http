@@ -1,0 +1,33 @@
+### Get task comments
+
+GET {{url}}/api/crm/tasks/{{taskId}}/comments?offset=0&limit=10
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Create task comment
+
+POST {{url}}/api/crm/tasks/{{taskId}}/comments
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "text": "Hello world!!!",
+  "fileIds": []
+}
+
+### Update task comment
+
+PUT {{url}}/api/crm/tasks/{{taskId}}/comments/{{taskCommentId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "text": "New text"
+}
+
+### Delete task comment
+
+DELETE {{url}}/api/crm/tasks/{{taskId}}/comments/47022018
+Content-Type: application/json
+Authorization: Bearer {{token}}
+

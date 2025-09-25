@@ -1,0 +1,18 @@
+### Get fields settings
+
+GET {{url}}/api/crm/entity-types/13022735/fields-settings
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Update fields settings
+
+PUT {{url}}/api/crm/entity-types/13022735/fields-settings
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "activeFieldCodes": [
+    "participants",
+    "description"
+  ]
+}

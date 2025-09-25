@@ -1,0 +1,5 @@
+### Get account settings
+
+GET {{url}}/api/account/settings
+Content-Type: application/json
+Authorization: Bearer {{token}}

@@ -1,0 +1,92 @@
+### Login by subdomain
+
+POST {{url}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+> {%
+client.global.set("token", response.body.token);
+client.global.set("userId", response.body.userId);
+%}
+
+### Login for site
+
+POST {{url}}/api/auth/login-site
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "test"
+}
+
+> {%
+client.global.set("loginLink", response.body.loginLink);
+client.global.set("subdomain", response.body.subdomain);
+%}
+
+### Login for extension
+
+POST {{url}}/api/auth/login-ext
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "test"
+}
+
+> {%
+client.global.set("token", response.body.token);
+client.global.set("userId", response.body.userId);
+%}
+
+### Decode login link
+
+POST {{subdomain}}.{{baseDomain}}/api/auth/decode-login-link
+Content-Type: application/json
+
+{
+  "loginLink": "{{loginLink}}"
+}
+
+> {%
+client.global.set("token", response.body.token);
+client.global.set("userId", response.body.userId);
+%}
+
+### Refresh token
+
+POST {{url}}/api/auth/refresh-token
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+> {%
+client.global.set("token", response.body.token);
+client.global.set("userId", response.body.userId);
+
+%}
+
+### Create account
+
+POST {{url}}/api/auth/accounts
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "test{{$randomInt}}@test.com",
+  "phone": "+79998887766",
+  "companyName": "test5",
+  "password": "test",
+  "ref": "{{partnerRef}}",
+  "promoCode": "some-promo-code",
+  "rmsCode": "demo"
+}
+
+> {%
+client.global.set("loginLink", response.body.loginLink);
+client.global.set("subdomain", response.body.subdomain);
+%}

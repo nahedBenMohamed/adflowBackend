@@ -1,0 +1,63 @@
+### Create automation with email action
+
+POST {{url}}/api/automation/automations
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "trigger": {
+    "type": "move_or_create_entity",
+    "settings": null
+  },
+  "action": {
+    "type": "send_email",
+    "delay": null,
+    "settings": {
+      "subject": "email subject",
+      "content": "email body",
+      "signature": "some signature",
+      "sendAsHtml": false,
+      "mailboxId": 27023020,
+      "userId": {{userId}},
+      "fileIds": []
+    }
+  },
+  "stageIds": [
+    {{stageId}}
+  ],
+  "conditions": [],
+  "isActive": true,
+  "applyTrigger": false
+}
+
+### Update automation with email action
+
+PUT {{url}}/api/automation/automations/{{emailAutomationId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "trigger": {
+    "type": "move_or_create_entity",
+    "settings": null
+  },
+  "action": {
+    "type": "send_email",
+    "delay": null,
+    "settings": {
+      "subject": "email subject",
+      "content": "email body",
+      "signature": "new signature",
+      "sendAsHtml": false,
+      "mailboxId": 27023020,
+      "userId": {{userId}},
+      "fileIds": []
+    }
+  },
+  "stageIds": [
+    {{stageId}}
+  ],
+  "conditions": [],
+  "isActive": true,
+  "applyTrigger": false
+}

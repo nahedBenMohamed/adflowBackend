@@ -1,0 +1,14 @@
+### Save field value
+
+POST {{url}}/api/crm/entities/{{entityId}}/field-values/{{budgetFieldId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "fieldId": {{budgetFieldId}},
+  "fieldType": "value",
+  "payload": {
+    "value": 500
+  },
+  "state": "updated"
+}

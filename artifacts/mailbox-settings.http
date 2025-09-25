@@ -1,0 +1,76 @@
+### Create mailbox
+
+POST {{url}}/api/mailing/settings/mailboxes
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "email": "test@company.com"
+}
+
+
+### Update mailbox
+
+PUT {{url}}/api/mailing/settings/mailboxes/{{mailboxId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "email": "test2@company.com",
+    "ownerId": {{userid}},
+    "accessibleUserIds": [{{userid}}],
+    "createContact": true,
+    "syncDays": 7
+}
+
+### Delete mailbox
+
+DELETE {{url}}/api/mailing/settings/mailboxes/{{mailboxId}}?save=true
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get mailboxes for settings
+
+GET {{url}}/api/mailing/settings/mailboxes
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get mailbox for settings
+
+GET {{url}}/api/mailing/settings/mailboxes/{{mailboxId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get mailbox manual settings
+
+GET {{url}}/api/mailing/settings/mailboxes/{{mailboxId}}/manual
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Update mailbox manual settings
+
+POST {{url}}/api/mailing/settings/mailboxes/{{mailboxId}}/manual
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "password": "12345678",
+  "imapServer": "imap.company.com",
+  "imapPort": 993,
+  "imapSecure": true,
+  "smtpServer": "smtp.company.com",
+  "smtpPort": 465,
+  "smtpSecure": true
+}
+
+### Get Gmail connection string for redirect
+
+GET {{url}}/api/mailing/settings/mailboxes/gmail/connect/{{mailboxId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Gmail callback endpoint
+
+GET {{url}}/api/mailing/settings/mailboxes/gmail/callback?state={{mailboxId}}&code=1234567890
+Content-Type: application/json
+Authorization: Bearer {{token}}

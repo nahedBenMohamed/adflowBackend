@@ -1,0 +1,29 @@
+### Create product price
+
+POST {{url}}/api/products/{{productId}}/prices
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": null,
+  "unitPrice": 100,
+  "currency": "EUR"
+}
+
+### Update product price
+
+PUT {{url}}/api/products/{{productId}}/prices/{{productPriceId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Updated price",
+  "unitPrice": 200,
+  "currency": "USD"
+}
+
+### Delete product price
+
+DELETE {{url}}/api/products/{{productId}}/prices/67
+Content-Type: application/json
+Authorization: Bearer {{token}}

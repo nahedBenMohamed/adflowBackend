@@ -1,0 +1,72 @@
+### Create entity type
+
+POST {{url}}/api/crm/constructor/create-entity-type
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Object",
+  "entityCategory": "universal",
+  "fieldGroups": [
+    {
+      "id": {{fieldGroupId}},
+      "name": "Details",
+      "sortOrder": 0,
+      "state": "created"
+    }
+  ],
+  "fields": [
+    {
+      "id": 4201,
+      "name": "Field name",
+      "type": "text",
+      "sortOrder": 1,
+      "fieldGroupId": {{fieldGroupId}},
+      "state": "created"
+    },
+    {
+      "id": 4202,
+      "name": "Field name",
+      "type": "select",
+      "sortOrder": 1,
+      "fieldGroupId": {{fieldGroupId}},
+      "options": [
+        {
+          "id": 1,
+          "label": "Option 1",
+          "sortOrder": 0,
+          "state": "created"
+        },
+        {
+          "id": 2,
+          "label": "Option 2",
+          "sortOrder": 1,
+          "state": "created"
+        }
+      ],
+      "state": "created"
+    }
+  ],
+  "featureIds": [1, 2, 3],
+  "taskSettingsActiveFields": ["planned_time", "board_name", "start_date", "end_date", "description", "subtasks"],
+  "linkedEntityTypes": [
+    {
+      "sortOrder": 0,
+      "targetEntityTypeId": "{{entityTypeId}}"
+    }
+  ],
+  "linkedEntityCategories": [{
+    "entityCategory": "contact",
+    "entityTypeName": "Partner contact",
+    "sectionName": "Partner contacts"
+  }, {
+    "entityCategory": "company",
+    "entityTypeName": "Partner company",
+    "sectionName": "Partner companies"
+  }],
+  "section": {
+    "name": "Objects",
+    "view": "board",
+    "icon": "crown"
+  }
+}

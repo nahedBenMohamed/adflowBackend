@@ -1,0 +1,27 @@
+### Create note
+
+POST {{url}}/api/crm/notes
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "entityId": {{entityId}},
+    "text": "Hello world!!!"
+}
+
+### Update note
+
+PUT {{url}}/api/crm/notes/{{noteId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "entityId": {{entityId}},
+    "text": "Updated note"
+}
+
+### Delete note
+
+DELETE {{url}}/api/crm/notes/321
+Content-Type: application/json
+Authorization: Bearer {{token}}

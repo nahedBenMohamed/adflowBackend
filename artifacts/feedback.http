@@ -1,0 +1,17 @@
+### Send feedback
+
+POST {{url}}/api/mailing/feedback
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "type": "trial_expired",
+    "payload": {
+      "name": "John Dow",
+      "phone": "+1234567890",
+      "email": "john.dow@company.com",
+      "userNumber": 10,
+      "subscribe": "yearly",
+      "plan": "basic"
+    }
+}

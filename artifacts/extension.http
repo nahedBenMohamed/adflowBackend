@@ -1,0 +1,15 @@
+### Create external link
+
+POST {{url}}/api/extension/external-link
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "url": "https://salesforce.com",
+  "name": "Tesla",
+  "responsibleUserId": {{userId}},
+  "entityTypeId": {{entityTypeId}},
+  "stageId": {{stageId}},
+  "fieldValues": [],
+  "entityLinks": []
+}

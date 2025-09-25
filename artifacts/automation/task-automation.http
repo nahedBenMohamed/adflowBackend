@@ -1,0 +1,57 @@
+### Create automation with task action
+
+POST {{url}}/api/automation/automations
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "trigger": {
+    "type": "move_or_create_entity",
+    "settings": null
+  },
+  "action": {
+    "type": "create_task",
+    "delay": 300,
+    "settings": {
+      "responsibleUserType": "custom",
+      "responsibleUserId": {{userId}},
+      "title": "some-title",
+      "text": "some-text",
+      "deadlineType": "immediately",
+      "deadlineTime": null
+    }
+  },
+  "stageIds": [
+    {{stageId}}
+  ],
+  "conditions": []
+}
+
+### Update automation with task action
+
+PUT {{url}}/api/automation/automations/{{taskAutomationId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "trigger": {
+    "type": "move_entity",
+    "settings": null
+  },
+  "action": {
+    "type": "create_task",
+    "delay": 3000,
+    "settings": {
+      "responsibleUserType": "custom",
+      "responsibleUserId": {{userId}},
+      "title": "new-title",
+      "text": "new-text",
+      "deadlineType": "custom",
+      "deadlineTime": 3000
+    }
+  },
+  "stageIds": [
+    {{stageId}}
+  ],
+  "conditions": []
+}

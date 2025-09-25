@@ -1,0 +1,21 @@
+### Get task types
+
+GET {{url}}/api/crm/task-types
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Create task type
+
+POST {{url}}/api/crm/task-types
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Call"
+}
+
+### Delete task type
+
+DELETE {{url}}/api/crm/task-types/321
+Content-Type: application/json
+Authorization: Bearer {{token}}

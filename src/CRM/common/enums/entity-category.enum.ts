@@ -1,0 +1,15 @@
+export enum EntityCategory {
+  UNIVERSAL = 'universal',
+  PARTNER = 'partner',
+  CUSTOMER = 'customer',
+  LOGISTICS = 'logistics',
+  PRODUCT = 'product',
+  REAL_ESTATE_PROPERTY = 'real_estate_property',
+  DEAL = 'deal',
+  CONTACT = 'contact',
+  COMPANY = 'company',
+  SUPPLIER = 'supplier',
+  CONTRACTOR = 'contractor',
+  HR = 'hr',
+  PROJECT = 'project',
+}

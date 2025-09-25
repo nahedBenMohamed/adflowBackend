@@ -1,0 +1,47 @@
+### Get all stages or by boardId
+
+GET {{url}}/api/crm/stages
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Save stages batch
+
+POST {{url}}/api/crm/stages/batch
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "stages": [
+    {
+      "id": "172",
+      "name": "Stage 1",
+      "color": "#fff",
+      "code": null,
+      "isSystem": false,
+      "sortOrder": 1,
+      "boardId": {{boardId}},
+      "state": "unchanged"
+    },
+    {
+      "id": "298",
+      "name": "Stage 2",
+      "color": "#fff",
+      "code": null,
+      "isSystem": false,
+      "sortOrder": 2,
+      "boardId": {{boardId}},
+      "state": "updated"
+    },
+    {
+      "id": "{{$randomInt}}",
+      "name": "Stage 4",
+      "color": "#fff",
+      "code": null,
+      "isSystem": false,
+      "sortOrder": 1,
+      "boardId": {{boardId}},
+      "state": "added"
+    }
+  ]
+}
+

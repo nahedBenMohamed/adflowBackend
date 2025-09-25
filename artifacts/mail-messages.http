@@ -1,0 +1,30 @@
+### Get mails for mailbox
+
+GET {{url}}/api/mailing/mailboxes/{{mailboxId}}/messages?folderId={{folderId}}&offset=0&limit=50
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get mails for section
+
+GET {{url}}/api/mailing/section/inbox/messages?mailboxId={{mailboxId}}&offset=0&limit=50
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get mail thread
+
+GET {{url}}/api/mailing/mailboxes/{{mailboxId}}/threads/1234567890
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get mail message
+
+GET {{url}}/api/mailing/mailboxes/{{mailboxId}}/messages/{{messageId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get mail attachment
+
+GET {{url}}'/api/mailing/mailboxes/{{mailboxId}}/messages/{{messageId}}/attachments/{{payloadId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+

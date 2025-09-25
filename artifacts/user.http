@@ -1,0 +1,73 @@
+### Get user by id
+
+GET {{url}}/api/users/{{userId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+### Create user
+
+POST {{url}}/api/settings/users
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "firstName": "Genadiy",
+    "lastName": "Genadiyev",
+    "email": "genadiy.genadiyev@test1.amwork.com",
+    "password": "123",
+    "phone": "+79998887766",
+    "role": "user"
+}
+
+### Update user
+
+PUT {{url}}/api/settings/users/{{userId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "firstName": "Genadiy!",
+    "lastName": "Genadiyev!",
+    "email": "genadiy.genadiyev@test1.amwork.com",
+    "password": "123",
+    "phone": "+79998887766",
+    "role": "admin"
+}
+
+### Delete activity
+
+DELETE {{url}}/api/settings/users/{{userId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get user list
+
+GET {{url}}/api/settings/users
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+### Get user by id
+
+GET {{url}}/api/settings/users/{{userId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+### Update user profile
+
+PUT {{url}}/api/user/{{userId}}/profile
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "birthDate": "1996-11-25T14:36:45",
+    "phone": "+79998887766"
+}
+
+### Get user profile by user id
+
+GET {{url}}/api/user/{{userId}}/profile
+Content-Type: application/json
+Authorization: Bearer {{token}}

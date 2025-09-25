@@ -1,0 +1,10 @@
+### Delete user and change responsible
+
+DELETE {{url}}/api/crm/user/delete
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "currentUserId": 12022001,
+    "newUserId": 12022002
+}

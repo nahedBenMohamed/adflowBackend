@@ -1,0 +1,10 @@
+### Get industries
+
+GET {{url}}/api/crm/rms/industries
+Content-Type: application/json
+
+### Delete demo data
+
+DELETE {{url}}/api/crm/rms/demo-data
+Content-Type: application/json
+Authorization: Bearer {{token}}

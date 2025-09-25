@@ -1,0 +1,18 @@
+### Update product stocks
+
+PUT {{url}}/api/products/{{productId}}/stocks
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "stocks": [
+    {
+      "warehouseId": {{warehouseId}},
+      "stockQuantity": 100
+    },
+    {
+      "warehouseId": {{secondWarehouseId}},
+      "stockQuantity": 200
+    }
+  ]
+}

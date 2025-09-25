@@ -1,0 +1,27 @@
+### Create subtask
+
+POST {{url}}/api/crm/tasks/{{taskId}}/subtasks
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "text": "new subtask",
+  "resolved": false
+}
+
+### Update subtask
+
+PUT {{url}}/api/crm/tasks/{{taskId}}/subtasks/{{subtaskId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "text": "updated subtask",
+  "resolved": false
+}
+
+### Delete subtask
+
+DELETE {{url}}/api/crm/tasks/{{taskId}}/subtasks/46022010
+Content-Type: application/json
+Authorization: Bearer {{token}}

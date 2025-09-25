@@ -1,0 +1,17 @@
+export enum NotificationType {
+  TASK_NEW = 'task_new',
+  TASK_OVERDUE = 'task_overdue',
+  TASK_BEFORE_START = 'task_before_start',
+  TASK_OVERDUE_EMPLOYEE = 'task_overdue_employee',
+  ACTIVITY_NEW = 'activity_new',
+  ACTIVITY_OVERDUE = 'activity_overdue',
+  ACTIVITY_BEFORE_START = 'activity_before_start',
+  ACTIVITY_OVERDUE_EMPLOYEE = 'activity_overdue_employee',
+  TASK_COMMENT_NEW = 'task_comment_new',
+  CHAT_MESSAGE_NEW = 'chat_message_new',
+  MAIL_MESSAGE_NEW = 'mail_new',
+  ENTITY_NOTE_NEW = 'entity_note_new',
+  ENTITY_NEW = 'entity_new',
+  ENTITY_RESPONSIBLE_CHANGE = 'entity_responsible_change',
+  ENTITY_IMPORT_COMPLETED = 'entity_import_completed',
+}

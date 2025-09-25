@@ -1,0 +1,24 @@
+### Upload file
+
+POST {{url}}/api/storage/upload
+Authorization: Bearer {{token}}
+Content-Type: multipart/form-data; boundary="abcd"
+
+--abcd
+Content-Disposition: form-data; name="test"; filename="test.png"
+Content-Type: image/png
+
+< ../_resources/test.png
+--abcd--
+
+### Delete file
+
+DELETE {{url}}/api/storage/file/{{fileId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get file
+
+GET {{url}}/api/storage/file/{{fileId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}

@@ -1,0 +1,5 @@
+### Delete file
+
+DELETE {{url}}/api/crm/file-link/1
+Content-Type: application/json
+Authorization: Bearer {{token}}

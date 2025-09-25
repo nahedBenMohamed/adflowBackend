@@ -1,0 +1,31 @@
+### Send contact us form
+
+POST {{url}}/api/forms/contact-us
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "test 10",
+  "phone": "+7999888776633",
+  "email": "test@test.com",
+  "comment": "some comment"
+}
+
+### Send partner form
+
+POST {{url}}/api/forms/partner
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "phone": "+7999888776633",
+  "email": "test@test.com",
+  "company": "Tesla",
+  "country": "USA",
+  "website": "tesla.com",
+  "employees": "10000",
+  "comment": "some comment"
+}
+

@@ -1,0 +1,12 @@
+### Delete file link by id
+
+DELETE {{url}}/api/crm/file-links/123
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Delete file links by ids
+
+DELETE {{url}}/api/crm/file-links?ids=72,73
+Content-Type: application/json
+Authorization: Bearer {{token}}
+

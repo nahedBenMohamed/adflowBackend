@@ -1,0 +1,17 @@
+### Get next identity for sequence
+
+GET {{url}}/api/crm/identity/board_id_seq
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get all identities pool
+
+GET {{url}}/api/crm/identities/all
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get identities pool
+
+GET {{url}}/api/crm/identities/feed_item_id_seq
+Content-Type: application/json
+Authorization: Bearer {{token}}

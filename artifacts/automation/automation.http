@@ -1,0 +1,11 @@
+### Get automations
+
+GET {{url}}/api/automation/board/{{boardId}}/automations
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Delete automation
+
+DELETE {{url}}/api/automation/automations/51011020
+Content-Type: application/json
+Authorization: Bearer {{token}}
