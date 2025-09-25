@@ -36,7 +36,7 @@ artifacts/_environment-config/http-client.env.json
 
 # Environment configuration
 .env.local
-
+.env
 # Yarn
 .yarn/cache/
 .yarn/unplugged/
