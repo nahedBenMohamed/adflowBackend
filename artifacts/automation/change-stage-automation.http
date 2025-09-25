@@ -1,0 +1,47 @@
+### Create automation with task action
+
+POST {{url}}/api/automation/automations
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "trigger": {
+    "type": "move_or_create_entity",
+    "settings": null
+  },
+  "action": {
+    "type": "change_stage",
+    "delay": null,
+    "settings": {
+      "stageId": {{stageId}}
+    }
+  },
+  "stageIds": [
+    {{stageId}}
+  ],
+  "conditions": []
+}
+
+### Update automation with task action
+
+PUT {{url}}/api/automation/automations/{{changeStageAutomationId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "trigger": {
+    "type": "move_or_create_entity",
+    "settings": null
+  },
+  "action": {
+    "type": "change_stage",
+    "delay": 300,
+    "settings": {
+      "stageId": {{stageId}}
+    }
+  },
+  "stageIds": [
+    {{stageId}}
+  ],
+  "conditions": []
+}

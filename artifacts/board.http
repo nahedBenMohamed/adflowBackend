@@ -1,0 +1,35 @@
+### Get boards
+
+GET {{url}}/api/crm/boards
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Create board
+
+POST {{url}}/api/crm/boards
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Board name",
+  "sortOrder": 1,
+  "type": "entity_type",
+  "recordId": {{entityTypeId}}
+}
+
+### Update board
+
+PUT {{url}}/api/crm/boards/{{boardId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Board name",
+  "sortOrder": 1
+}
+
+### Delete board
+
+DELETE {{url}}/api/crm/boards/321
+Content-Type: application/json
+Authorization: Bearer {{token}}

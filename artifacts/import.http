@@ -1,0 +1,5 @@
+### Get import template for entityType
+
+GET {{url}}/api/crm/entity-types/{{entityTypeId}}/template
+Content-Type: application/json
+Authorization: Bearer {{token}}

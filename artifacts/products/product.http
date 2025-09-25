@@ -1,0 +1,86 @@
+### Get products
+
+GET {{url}}/api/products?categoryId={{productCategoryId}}&search=some&offset=0&limit=10
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get products by ids
+
+GET {{url}}/api/products?ids=1,2,3
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get product
+
+GET {{url}}/api/products/{{productId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Create product
+
+POST {{url}}/api/products
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Some product",
+  "type": "service",
+  "description": "Some description",
+  "sku": "some-product",
+  "unit": "some-unit",
+  "tax": 10,
+  "categoryId": {{productCategoryId}},
+  "prices": [
+    {
+      "name": "Price in USD",
+      "unitPrice": 100,
+      "currency": "USD"
+    },
+    {
+      "name": "Price in KZT",
+      "unitPrice": 200,
+      "currency": "KZT"
+    }
+  ],
+  "photoFileIds": ["c7d48430-a2b7-4ea5-96a2-58bc40d90574"],
+  "stocks": [
+    {
+      "warehouseId": {{warehouseId}},
+      "stockQuantity": 100
+    }
+  ]
+}
+
+### Update product
+
+PUT {{url}}/api/products/{{productId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "New product name",
+  "description": "New description",
+  "sku": "new-product",
+  "unit": "new-unit",
+  "tax": 20,
+  "categoryId": {{productCategoryId}}
+}
+
+### Delete product
+
+DELETE {{url}}/api/products/123
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Upload product photos
+
+POST {{url}}/api/products/{{productId}}/photos
+Authorization: Bearer {{token}}
+Content-Type: multipart/form-data; boundary="abcd"
+
+--abcd
+Content-Disposition: form-data; name="test"; filename="test.png"
+Content-Type: image/png
+
+< ../_resources/test.png
+--abcd--

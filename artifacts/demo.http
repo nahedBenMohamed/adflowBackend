@@ -1,0 +1,5 @@
+### Create demo massive data
+
+POST {{url}}/api/crm/demo-massive-data
+Content-Type: application/json
+Authorization: Bearer {{token}}

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions
+  xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:modeler="http://camunda.org/schema/modeler/1.0"
+  xmlns:zeebe="http://camunda.org/schema/zeebe/1.0"
+  xmlns:camunda="http://camunda.org/schema/1.0/bpmn"
+  targetNamespace="http://bpmn.io/schema/bpmn"
+  modeler:executionPlatform="Camunda Cloud"
+  modeler:executionPlatformVersion="8.5.0"
+  id="Definitions_{{accountId}}_{{entityTypeId}}_{{processId}}"
+>
+  <bpmn:process id="Automation_{{accountId}}_{{entityTypeId}}_{{processId}}" name="{{name}}" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_Process" name="Process start">
+      <bpmn:outgoing>Flow_ProcessStart</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_ProcessStart" sourceRef="StartEvent_Process" targetRef="Gateway_CheckCondition" />
+    {{#if events.create}}
+    <bpmn:startEvent id="StartEvent_Created" name="On entity created">
+      <bpmn:outgoing>Flow_OnCreated</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_EntityCreated" messageRef="Message_EntityCreated" />
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_OnCreated" sourceRef="StartEvent_Created" targetRef="Gateway_CheckCondition" />
+    {{/if}}
+    {{#if events.changeStage}}
+    <bpmn:startEvent id="StartEvent_StageChanged" name="On entity stage changed">
+      <bpmn:outgoing>Flow_OnStageChanged</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_EntityStageChanged" messageRef="Message_EntityStageChanged" />
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_OnStageChanged" sourceRef="StartEvent_StageChanged" targetRef="Gateway_CheckCondition" />
+    {{/if}}
+    {{#if events.changeOwner}}
+    <bpmn:startEvent id="StartEvent_OwnerChanged" name="On entity owner changed">
+      <bpmn:outgoing>Flow_OnOwnerChanged</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_EntityOwnerChanged" messageRef="Message_EntityOwnerChanged" />
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_OnOwnerChanged" sourceRef="StartEvent_OwnerChanged" targetRef="Gateway_CheckCondition" />
+    {{/if}}
+    <bpmn:exclusiveGateway id="Gateway_CheckCondition" default="Flow_ConditionNotCorrect">
+      {{#if events.create}}
+      <bpmn:incoming>Flow_OnCreated</bpmn:incoming>
+      {{/if}}
+      {{#if events.changeStage}}
+      <bpmn:incoming>Flow_OnStageChanged</bpmn:incoming>
+      {{/if}}
+      {{#if events.changeOwner}}
+      <bpmn:incoming>Flow_OnOwnerChanged</bpmn:incoming>
+      {{/if}}
+      <bpmn:outgoing>Flow_ConditionCorrect</bpmn:outgoing>
+      <bpmn:outgoing>Flow_ConditionNotCorrect</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_ConditionCorrect" sourceRef="Gateway_CheckCondition" targetRef="Event_ServiceTaskDelay">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">={{{conditions}}}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:intermediateCatchEvent id="Event_ServiceTaskDelay">
+      <bpmn:incoming>Flow_ConditionCorrect</bpmn:incoming>
+      <bpmn:outgoing>Flow_AfterDelay</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_ServiceTaskDelay">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">{{action.delay}}</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_AfterDelay" sourceRef="Event_ServiceTaskDelay" targetRef="Activity_ServiceTask" />
+    <bpmn:serviceTask id="Activity_ServiceTask" name="Service task">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="{{action.type}}" />
+        <zeebe:ioMapping>
+          <zeebe:input source="={{action.settings}}" target="{{action.target}}" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_AfterDelay</bpmn:incoming>
+      <bpmn:outgoing>Flow_ServiceTaskCompleted</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_ServiceTaskCompleted" sourceRef="Activity_ServiceTask" targetRef="EndEvent" />
+    <bpmn:sequenceFlow id="Flow_ConditionNotCorrect" sourceRef="Gateway_CheckCondition" targetRef="EndEvent" />
+    <bpmn:endEvent id="EndEvent">
+      <bpmn:incoming>Flow_ConditionNotCorrect</bpmn:incoming>
+      <bpmn:incoming>Flow_ServiceTaskCompleted</bpmn:incoming>
+    </bpmn:endEvent>
+  </bpmn:process>
+  {{#if events.create}}
+  <bpmn:message id="Message_EntityCreated" name="{{accountId}}|{{entityTypeId}}|entity:created" />
+  {{/if}}
+  {{#if events.changeStage}}
+  <bpmn:message id="Message_EntityStageChanged" name="{{accountId}}|{{entityTypeId}}|entity:stage_changed" />
+  {{/if}}
+  {{#if events.changeOwner}}
+  <bpmn:message id="Message_EntityOwnerChanged" name="{{accountId}}|{{entityTypeId}}|entity:owner_changed" />
+  {{/if}}
+  <bpmndi:BPMNDiagram id="BPMNDiagram_{{accountId}}_{{entityTypeId}}_{{processId}}">
+    <bpmndi:BPMNPlane id="BPMNPlane" bpmnElement="Automation_{{accountId}}_{{entityTypeId}}_{{processId}}">
+      <bpmndi:BPMNShape id="StartEvent_Process_di" bpmnElement="StartEvent_Process">
+        <dc:Bounds x="150" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="135" y="123" width="65" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_ProcessStart_di" bpmnElement="Flow_ProcessStart">
+        <di:waypoint x="186" y="100" />
+        <di:waypoint x="320" y="100" />
+        <di:waypoint x="320" y="263" />
+      </bpmndi:BPMNEdge>
+      {{#if events.create}}
+      <bpmndi:BPMNShape id="StartEvent_Created_di" bpmnElement="StartEvent_Created">
+        <dc:Bounds x="150" y="270" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="128" y="313" width="84" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_OnCreated_di" bpmnElement="Flow_OnCreated">
+        <di:waypoint x="186" y="288" />
+        <di:waypoint x="295" y="288" />
+      </bpmndi:BPMNEdge>
+      {{/if}}
+      {{#if events.changeStage}}
+      <bpmndi:BPMNShape id="StartEvent_StageChanged_di" bpmnElement="StartEvent_StageChanged">
+        <dc:Bounds x="150" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="131" y="215" width="74" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_OnStageChanged_di" bpmnElement="Flow_OnStageChanged">
+        <di:waypoint x="186" y="190" />
+        <di:waypoint x="320" y="190" />
+        <di:waypoint x="320" y="263" />
+      </bpmndi:BPMNEdge>
+      {{/if}}
+      {{#if events.changeOwner}}
+      <bpmndi:BPMNShape id="StartEvent_OwnerChanged_di" bpmnElement="StartEvent_OwnerChanged">
+        <dc:Bounds x="150" y="352" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="131" y="395" width="78" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_OnOwnerChanged_di" bpmnElement="Flow_OnOwnerChanged">
+        <di:waypoint x="186" y="370" />
+        <di:waypoint x="320" y="370" />
+        <di:waypoint x="320" y="313" />
+      </bpmndi:BPMNEdge>
+      {{/if}}
+      <bpmndi:BPMNShape id="Gateway_CheckCondition_di" bpmnElement="Gateway_CheckCondition" isMarkerVisible="true">
+        <dc:Bounds x="295" y="263" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_ConditionCorrect_di" bpmnElement="Flow_ConditionCorrect">
+        <di:waypoint x="345" y="288" />
+        <di:waypoint x="412" y="288" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="348" y="156" width="49" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_ServiceTaskDelay_di" bpmnElement="Event_ServiceTaskDelay">
+        <dc:Bounds x="412" y="270" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_AfterDelay_di" bpmnElement="Flow_AfterDelay">
+        <di:waypoint x="448" y="288" />
+        <di:waypoint x="510" y="288" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_ServiceTask_di" bpmnElement="Activity_ServiceTask">
+        <dc:Bounds x="510" y="248" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_ServiceTaskCompleted_di" bpmnElement="Flow_ServiceTaskCompleted">
+        <di:waypoint x="560" y="328" />
+        <di:waypoint x="560" y="402" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ConditionNotCorrect_di" bpmnElement="Flow_ConditionNotCorrect">
+        <di:waypoint x="320" y="313" />
+        <di:waypoint x="320" y="420" />
+        <di:waypoint x="542" y="420" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="275" y="264" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_di" bpmnElement="EndEvent">
+        <dc:Bounds x="542" y="402" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

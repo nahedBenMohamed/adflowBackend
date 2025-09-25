@@ -1,0 +1,31 @@
+### Get warehouses
+
+GET {{url}}/api/products/warehouses
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Create warehouse
+
+POST {{url}}/api/products/warehouses
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Some warehouse"
+}
+
+### Update warehouse
+
+PUT {{url}}/api/products/warehouses/{{warehouseId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "New warehouse name"
+}
+
+### Delete warehouse
+
+DELETE {{url}}/api/products/warehouses/123
+Content-Type: application/json
+Authorization: Bearer {{token}}

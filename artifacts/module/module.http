@@ -1,0 +1,17 @@
+### Get modules
+
+GET {{url}}/api/crm/modules
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Activate module
+
+POST {{url}}/api/crm/modules/{{moduleId}}/activate
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Deactivate module
+
+POST {{url}}/api/crm/modules/{{moduleId}}/deactivate
+Content-Type: application/json
+Authorization: Bearer {{token}}

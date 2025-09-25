@@ -1,0 +1,5 @@
+### Run migration
+
+POST {{url}}/api/crm/run-migration
+Content-Type: application/json
+Authorization: Bearer {{token}}

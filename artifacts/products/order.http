@@ -1,0 +1,92 @@
+### Get entity order
+
+GET {{url}}/api/products/orders/entity/{{entityId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get entity order products count
+
+GET {{url}}/api/products/orders/entity/{{entityId}}/products-count
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Create order
+
+POST {{url}}/api/products/orders
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "entityId": {{entityId}},
+  "currency": "USD",
+  "taxIncluded": true,
+  "statusId": {{orderStatusId}},
+  "warehouseId": {{warehouseId}},
+  "items": [
+    {
+      "productId": {{productId}},
+      "quantity": 5,
+      "unitPrice": 100,
+      "tax": 10,
+      "discount": 0,
+      "sortOrder": 0,
+      "reservations": [
+        {
+          "warehouseId": {{warehouseId}},
+          "quantity": 5
+        },
+        {
+          "warehouseId": {{secondWarehouseId}},
+          "quantity": 10
+        }
+      ]
+    }
+  ]
+}
+
+### Update order
+
+PUT {{url}}/api/products/orders/{{orderId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "entityId": {{entityId}},
+  "currency": "USD",
+  "taxIncluded": true,
+  "statusId": {{orderStatusId}},
+  "warehouseId": {{secondWarehouseId}},
+  "items": [
+    {
+      "id": 14,
+      "productId": {{productId}},
+      "quantity": 10,
+      "unitPrice": 200,
+      "tax": 10,
+      "discount": 30,
+      "sortOrder": 2,
+      "reservations": [
+        {
+          "warehouseId": {{warehouseId}},
+          "quantity": 5
+        }
+      ]
+    },
+    {
+      "id": -1,
+      "productId": {{productId}},
+      "quantity": 20,
+      "unitPrice": 100,
+      "tax": 20,
+      "discount": 30,
+      "sortOrder": 3,
+      "reservations": []
+    }
+  ]
+}
+
+### Change order status
+
+PUT {{url}}/api/products/orders/{{orderId}}/status/{{orderStatusId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}

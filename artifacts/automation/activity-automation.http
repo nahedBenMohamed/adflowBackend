@@ -1,0 +1,93 @@
+### Create automation with activity action
+
+POST {{url}}/api/automation/automations
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "trigger": {
+    "type": "move_or_create_entity",
+    "settings": null
+  },
+  "action": {
+    "type": "create_activity",
+    "delay": 300,
+    "settings": {
+      "responsibleUserType": "custom",
+      "responsibleUserId": {{userId}},
+      "activityTypeId": {{activityTypeId}},
+      "text": "some-text",
+      "deadlineType": "immediately",
+      "deadlineTime": null
+    }
+  },
+  "stageIds": [
+    {{stageId}}
+  ],
+  "conditions": [
+    {
+      "type": "responsible_user",
+      "settings": {
+        "userIds": [{{userId}}]
+      }
+    },
+    {
+      "type": "field",
+      "settings": {
+        "fieldId": {{budgetFieldId}},
+        "fieldType": "value",
+        "payload": {
+          "from": 100,
+          "to": 200
+        }
+      }
+    }
+  ]
+}
+
+### Update automation with activity action
+
+PUT {{url}}/api/automation/automations/{{activityAutomationId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "trigger": {
+    "type": "move_or_create_entity",
+    "settings": null
+  },
+  "action": {
+    "type": "create_activity",
+    "delay": 300,
+    "settings": {
+      "responsibleUserType": "custom",
+      "responsibleUserId": {{userId}},
+      "activityTypeId": {{activityTypeId}},
+      "text": "test",
+      "deadlineType": "immediately",
+      "deadlineTime": null
+    }
+  },
+  "stageIds": [
+    {{stageId}}
+  ],
+  "conditions": [
+    {
+      "type": "responsible_user",
+      "settings": {
+        "userIds": [{{userId}}]
+      }
+    },
+    {
+      "type": "field",
+      "settings": {
+        "fieldId": {{budgetFieldId}},
+        "fieldType": "value",
+        "payload": {
+          "from": 100,
+          "to": 200
+        }
+      }
+    }
+  ]
+}

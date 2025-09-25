@@ -1,0 +1,5 @@
+### Send event to rabbit
+
+POST {{url}}/api/rabbit
+Content-Type: application/json
+Authorization: Bearer {{token}}

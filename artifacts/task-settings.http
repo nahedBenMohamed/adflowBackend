@@ -1,0 +1,39 @@
+### Get task settings
+
+GET {{url}}/api/crm/task-settings
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Create task settings
+
+POST {{url}}/api/crm/task-settings
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "type": "task_board",
+  "recordId": 123,
+  "activeFields": [
+    "planned_time",
+    "board_name",
+    "start_date",
+    "end_date"
+  ]
+}
+
+### Update task settings
+
+PUT {{url}}/api/crm/task-settings/{{taskSettingsId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "activeFields": [
+    "planned_time",
+    "board_name",
+    "start_date",
+    "end_date",
+    "description",
+    "subtasks"
+  ]
+}

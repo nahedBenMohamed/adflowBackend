@@ -1,0 +1,56 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES2022",
+    "declaration": true,
+    "removeComments": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    
+    "paths": {
+      "@/*": ["src/*"],
+    },
+    "typeRoots": ["./types", "./node_modules/@types"],
+
+    // Strict Checks
+    "strict": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "strictPropertyInitialization": false,
+    "exactOptionalPropertyTypes": false,
+    "useUnknownInCatchVariables": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true,
+    "strictBindCallApply": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    // Linter Checks
+    "noImplicitReturns": true,
+    "noImplicitOverride": true,
+    "forceConsistentCasingInFileNames": true,
+    // https://eslint.org/docs/rules/consistent-return ?
+    "noFallthroughCasesInSwitch": true,
+    // https://eslint.org/docs/rules/no-fallthrough
+    "noUnusedLocals": true,
+    // https://eslint.org/docs/rules/no-unused-vars
+    "noUnusedParameters": true,
+    // https://eslint.org/docs/rules/no-unused-vars#args
+    "allowUnreachableCode": false,
+    // https://eslint.org/docs/rules/no-unreachable ?
+    "allowUnusedLabels": false,
+    // https://eslint.org/docs/rules/no-unused-labels
+    // Base Strict Checks
+    "noImplicitUseStrict": false,
+    "suppressExcessPropertyErrors": false,
+    "suppressImplicitAnyIndexErrors": false,
+    "noStrictGenericChecks": false
+  }
+}

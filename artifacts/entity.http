@@ -1,0 +1,108 @@
+### Get entity
+
+GET {{url}}/api/crm/entities/{{entityId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Create entity
+
+POST {{url}}/api/crm/entities
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": {{$randomInt}},
+  "name": "Tesla",
+  "responsibleUserId": {{userId}},
+  "entityTypeId": {{entityTypeId}},
+  "stageId": {{stageId}},
+  "fieldValues": [
+    {
+      "id": {{$randomInt}},
+      "fieldId": {{budgetFieldId}},
+      "fieldType": "number",
+      "payload": {
+        "value": 100000
+      },
+      "state": "created"
+    }
+  ],
+  "entityLinks": [
+    {
+      "id": {{$randomInt}},
+      "sourceId": {{entityId}},
+      "targetId": {{elonContactEntityId}},
+      "sortOrder": 0,
+      "state": "created"
+    }
+  ]
+}
+
+### Update entity
+
+PUT {{url}}/api/crm/entities/{{entityId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": {{entityId}},
+  "name": "Tesla",
+  "responsibleUserId": {{userId}},
+  "entityTypeId": {{entityTypeId}},
+  "stageId": {{stageId}},
+  "fieldValues": [
+    {
+      "fieldId": {{budgetFieldId}},
+      "fieldType": "number",
+      "payload": {
+        "value": 10000
+      },
+      "state": "updated"
+    }
+  ],
+  "entityLinks": [
+    {
+      "id": {{$randomInt}},
+      "sourceId": {{entityId}},
+      "targetId": {{elonContactEntityId}},
+      "sortOrder": 0,
+      "state": "created"
+    }
+  ]
+}
+
+### Update entity stage
+
+PUT {{url}}/api/crm/entities/{{entityId}}/stage/{{stageId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Delete entity
+
+DELETE {{url}}/api/crm/entities/321
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get entities for board
+
+GET {{url}}/api/crm/entities/{{entityTypeId}}/{{boardId}}/cards
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get entities list items
+
+GET {{url}}/api/crm/entities/{{entityTypeId}}/list-items
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Search entities in name, all fields and linked entities
+
+GET {{url}}/api/crm/entities/{{entityTypeId}}/search?value=book
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Search entities by name or field value
+
+GET {{url}}/api/crm/entities/{{entityTypeId}}/search/fields?name=book&field[42022001]=4&field[42022003]=com
+Content-Type: application/json
+Authorization: Bearer {{token}}

@@ -1,0 +1,48 @@
+### Update entity type fields and groups
+
+PUT {{url}}/api/crm/entity-types/{{entityTypeId}}/fields-and-groups
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "fieldGroups": [
+    {
+      "id": {{fieldGroupId}},
+      "name": "Details",
+      "sortOrder": 0,
+      "state": "created"
+    }
+  ],
+  "fields": [
+    {
+      "id": 4201,
+      "name": "Field name",
+      "type": "text",
+      "sortOrder": 1,
+      "fieldGroupId": {{fieldGroupId}},
+      "state": "updated"
+    },
+    {
+      "id": 4202,
+      "name": "Field name",
+      "type": "select",
+      "sortOrder": 1,
+      "fieldGroupId": {{fieldGroupId}},
+      "options": [
+        {
+          "id": 1,
+          "label": "Option 1",
+          "sortOrder": 0,
+          "state": "created"
+        },
+        {
+          "id": 2,
+          "label": "Option 2",
+          "sortOrder": 1,
+          "state": "created"
+        }
+      ],
+      "state": "created"
+    }
+  ]
+}

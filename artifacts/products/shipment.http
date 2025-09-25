@@ -1,0 +1,17 @@
+### Get shipments
+
+GET {{url}}/api/products/shipments?offset=0&limit=10
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get shipment by id
+
+GET {{url}}/api/products/shipments/{{shipmentId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Change shipment status
+
+PUT {{url}}/api/products/shipments/{{shipmentId}}/status/{{shipmentStatusId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}

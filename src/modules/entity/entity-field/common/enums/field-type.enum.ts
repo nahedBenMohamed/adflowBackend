@@ -1,0 +1,37 @@
+export enum FieldType {
+  Text = 'text',
+  MultiText = 'multitext',
+  RichText = 'richtext',
+  Switch = 'switch',
+  Number = 'number',
+  Formula = 'formula',
+  Phone = 'phone',
+  Email = 'email',
+  Value = 'value',
+  Date = 'date',
+  Link = 'link',
+  Select = 'select',
+  ColoredSelect = 'colored_select',
+  MultiSelect = 'multiselect',
+  ColoredMultiSelect = 'colored_multiselect',
+  CheckedMultiSelect = 'checked_multiselect',
+  Participant = 'participant',
+  Participants = 'participants',
+  File = 'file',
+  Checklist = 'checklist',
+}
+
+export const FieldTypes = {
+  calculable: [FieldType.Number, FieldType.Value, FieldType.Formula],
+  formula: [FieldType.Value, FieldType.Formula],
+  participant: [FieldType.Participant, FieldType.Participants],
+  select: [FieldType.Select, FieldType.ColoredSelect],
+  multiSelect: [FieldType.MultiSelect, FieldType.ColoredMultiSelect, FieldType.CheckedMultiSelect],
+  withOptions: [
+    FieldType.Select,
+    FieldType.ColoredSelect,
+    FieldType.MultiSelect,
+    FieldType.ColoredMultiSelect,
+    FieldType.CheckedMultiSelect,
+  ],
+};

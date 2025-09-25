@@ -1,0 +1,11 @@
+### Like task comment
+
+POST {{url}}/api/crm/tasks/{{taskId}}/comments/{{taskCommentId}}/like
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Unlike task comment
+
+POST {{url}}/api/crm/tasks/{{taskId}}/comments/{{taskCommentId}}/unlike
+Content-Type: application/json
+Authorization: Bearer {{token}}

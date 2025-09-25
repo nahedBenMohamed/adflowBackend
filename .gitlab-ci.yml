@@ -1,0 +1,145 @@
+stages:
+  - prepare
+  - build
+  - deploy
+
+default:
+  image: kroniak/ssh-client
+  interruptible: true
+  before_script:
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - chmod 400 ~/.ssh/id_rsa
+
+.prepare_script: &prepare_script
+  - tar -czf sources.tar.gz .
+  - scp -r sources.tar.gz $USER@$SERVER:$FOLDER
+
+.build_script: &build_script
+  - ssh $USER@$SERVER "cd $FOLDER && ./build.sh"
+
+.deploy_script: &deploy_script
+  - ssh $USER@$SERVER "cd $FOLDER && ./deploy.sh"
+
+.staging_job:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+  variables:
+    SSH_PRIVATE_KEY: $STAGING_SSH_PRIVATE_KEY
+    USER: $STAGING_USER
+    SERVER: $STAGING_SERVER
+    FOLDER: /amwork/backend
+  environment:
+    name: staging
+    url: https://amwork.dev
+
+.amwork_job:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  variables:
+    SSH_PRIVATE_KEY: $AMWORK_PROD_SSH_PRIVATE_KEY
+    USER: $AMWORK_PROD_USER
+    SERVER: $AMWORK_PROD_SERVER
+    FOLDER: /amwork/backend
+  environment:
+    name: production/amwork
+    url: https://amwork.com
+
+.mywork_job:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  variables:
+    SSH_PRIVATE_KEY: $MYWORK_PROD_SSH_PRIVATE_KEY
+    USER: $MYWORK_PROD_USER
+    SERVER: $MYWORK_PROD_SERVER
+    FOLDER: /mywork/backend
+  environment:
+    name: production/mywork
+    url: https://mywork.app
+
+# Staging
+staging_prepare:
+  extends: .staging_job
+  stage: prepare
+  script: *prepare_script
+staging_build:
+  extends: .staging_job
+  stage: build
+  variables:
+    GIT_STRATEGY: none
+  script: *build_script
+staging_deploy:
+  extends: .staging_job
+  stage: deploy
+  variables:
+    GIT_STRATEGY: none
+  script: *deploy_script
+
+# Amwork Production
+amwork_prepare:
+  extends: .amwork_job
+  stage: prepare
+  script: *prepare_script
+amwork_build:
+  extends: .amwork_job
+  stage: build
+  variables:
+    GIT_STRATEGY: none
+  script: *build_script
+amwork_deploy:
+  extends: .amwork_job
+  stage: deploy
+  when: manual
+  variables:
+    GIT_STRATEGY: none
+  script: *deploy_script
+
+# Mywork Production
+mywork_prepare:
+  extends: .mywork_job
+  stage: prepare
+  variables:
+    FOLDER: /apps/mywork/backend
+  script: *prepare_script
+mywork_build:
+  extends: .mywork_job
+  stage: build
+  variables:
+    GIT_STRATEGY: none
+    FOLDER: /apps/mywork/backend
+  script: *build_script
+mywork_deploy:
+  extends: .mywork_job
+  stage: deploy
+  when: manual
+  variables:
+    GIT_STRATEGY: none
+    FOLDER: /apps/mywork/backend
+  script: *deploy_script
+
+# Platforma500 Production
+platforma500_prepare:
+  extends: .mywork_job
+  stage: prepare
+  needs: [mywork_prepare]
+  variables:
+    FOLDER: /apps/platforma500/backend
+  script: *prepare_script
+platforma500_build:
+  extends: .mywork_job
+  stage: build
+  needs: [mywork_build]
+  variables:
+    GIT_STRATEGY: none
+    FOLDER: /apps/platforma500/backend
+  script: *build_script
+platforma500_deploy:
+  extends: .mywork_job
+  stage: deploy
+  when: manual
+  variables:
+    GIT_STRATEGY: none
+    FOLDER: /apps/platforma500/backend
+  script: *deploy_script

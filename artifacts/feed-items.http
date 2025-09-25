@@ -1,0 +1,5 @@
+### Get feed items for entity with paging
+
+GET {{url}}/api/crm/feed-items?entityId={{entityId}}&offset=0&limit=10
+Content-Type: application/json
+Authorization: Bearer {{token}}

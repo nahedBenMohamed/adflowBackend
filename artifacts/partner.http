@@ -1,0 +1,11 @@
+### Get partner summary
+
+GET {{url}}/api/partners/{{partnerId}}/summary
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get partner leads
+
+GET {{url}}/api/partners/{{partnerId}}/leads
+Content-Type: application/json
+Authorization: Bearer {{token}}

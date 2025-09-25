@@ -1,0 +1,32 @@
+### Get categories
+
+GET {{url}}/api/products/categories
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Create category
+
+POST {{url}}/api/products/categories
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Category 1",
+  "parentId": null
+}
+
+### Update category
+
+PUT {{url}}/api/products/categories/{{productCategoryId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Category new name"
+}
+
+### Delete category
+
+DELETE {{url}}/api/products/categories/123
+Content-Type: application/json
+Authorization: Bearer {{token}}

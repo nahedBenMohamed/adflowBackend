@@ -1,0 +1,134 @@
+### Get task by id
+
+GET {{url}}/api/crm/tasks/{{taskId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Create task
+
+POST {{url}}/api/crm/tasks
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "responsibleUserId": {{userId}},
+    "startDate": "2022-11-21T17:37:03",
+    "endDate": "2022-11-22T17:37:03",
+    "text": "Task with start and end time",
+    "isResolved": false,
+    "result": null,
+    "entityId": {{entityId}},
+    "title": "Task 1",
+    "plannedTime": 3600,
+    "stageId": {{taskStageId}},
+    "settingsId": {{taskSettingsId}},
+    "subtasks": [
+      {"text":  "subtask 1", "resolved":  true},
+      {"text":  "subtask 2", "resolved":  false}
+    ]
+}
+
+### Update task
+
+PUT {{url}}/api/crm/tasks/{{taskId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "responsibleUserId": {{userId}},
+    "startDate": "2022-11-23T17:37:03",
+    "endDate": "2022-11-24T17:37:03",
+    "text": "Updated Task 1 with start and end time",
+    "isResolved": true,
+    "result": "Result",
+    "entityId": {{entityId}},
+    "title": "Updated Task 1"
+}
+
+### Delete task
+
+DELETE {{url}}/api/crm/tasks/321
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Create activity
+
+POST {{url}}/api/crm/activities
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "responsibleUserId": {{userId}},
+    "startDate": "2022-11-21T17:37:03",
+    "endDate": "2022-11-22T17:37:03",
+    "text": "Activity with start and end time",
+    "isResolved": false,
+    "result": null,
+    "entityId": {{entityId}},
+    "activityTypeId": {{activityTypeId}}
+}
+
+### Update activity
+
+PUT {{url}}/api/crm/activities/{{activityId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "responsibleUserId": {{userId}},
+    "startDate": "2022-11-23T17:37:03",
+    "endDate": "2022-11-24T17:37:03",
+    "text": "Updated Activity 1 with start and end time",
+    "isResolved": true,
+    "result": "Result",
+    "entityId": {{entityId}},
+    "activityTypeId": {{activityTypeId}}
+}
+
+### Delete activity
+
+DELETE {{url}}/api/crm/activities/321
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get activities
+
+GET {{url}}/api/crm/activities/cards?responsibleUserId={{userId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get tasks by time
+
+POST {{url}}/api/crm/tasks/by_time
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get time board meta
+
+POST {{url}}/api/crm/tasks/by_time/meta
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "stageIds": [{{taskStageId}}]
+}
+
+### Get tasks by board
+
+POST {{url}}/api/crm/tasks/boards/{{taskBoardId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "ownerIds": [{{userId}}]
+}
+
+### Get tasks board meta
+
+POST {{url}}/api/crm/tasks/boards/{{taskBoardId}}/meta
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "stageIds": [{{taskStageId}}]
+}

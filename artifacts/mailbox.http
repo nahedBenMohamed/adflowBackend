@@ -1,0 +1,5 @@
+### Get mailboxes
+
+GET {{url}}/api/mailing/mailboxes
+Content-Type: application/json
+Authorization: Bearer {{token}}

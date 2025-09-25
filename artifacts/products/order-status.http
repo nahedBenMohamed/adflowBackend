@@ -1,0 +1,5 @@
+### Get order statuses
+
+GET {{url}}/api/products/order-statuses
+Content-Type: application/json
+Authorization: Bearer {{token}}
